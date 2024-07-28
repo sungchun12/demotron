@@ -27,23 +27,29 @@ app = typer.Typer(
     no_args_is_help=True,
 )
 
+
 def version_callback(value: bool):
     if value:
         typer.echo(f"demotron version: {__version__}")
         raise typer.Exit()
 
+
 @app.callback()
 def main(
-    version: Annotated[bool, typer.Option(
-        "--version",
-        callback=version_callback,
-        is_eager=True,
-        help="Show the version and exit."
-    )] = False,
+    version: Annotated[
+        bool,
+        typer.Option(
+            "--version",
+            callback=version_callback,
+            is_eager=True,
+            help="Show the version and exit.",
+        ),
+    ] = False,
 ):
     """
     CLI to delight real people with live demos.
     """
+
 
 @app.command()
 def rename_column(

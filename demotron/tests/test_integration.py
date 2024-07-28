@@ -89,6 +89,7 @@ def test_integration_error_handling(
     )
     assert result.exit_code != 0
 
+
 @patch("demo_scripts.main.get_service_account_info")
 @patch("google.oauth2.service_account.Credentials.from_service_account_info")
 @patch("google.cloud.bigquery.Client")
