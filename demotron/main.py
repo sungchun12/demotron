@@ -19,6 +19,7 @@ from demotron.rename_column_util import rename_column_util
 from demotron.load_raw_events import RawEventLoader
 from datetime import datetime
 from demotron.config import get_service_account_info
+from demotron import __version__
 
 app = typer.Typer()
 
@@ -32,8 +33,16 @@ def display_tool_info():
     typer.echo("  append-rawdata  Append generated fake data to a new or existing table")
     typer.echo("\nRun 'demotron COMMAND --help' for more information on a specific command.")
 
+def version_callback(value: bool):
+    if value:
+        typer.echo(f"demotron version: {__version__}")
+        raise typer.Exit()
+
 @app.callback(invoke_without_command=True)
-def main(ctx: typer.Context):
+def main(
+    ctx: typer.Context,
+    version: bool = typer.Option(None, "--version", callback=version_callback, is_eager=True, help="Show the version and exit.")
+):
     if ctx.invoked_subcommand is None:
         display_tool_info()
 
