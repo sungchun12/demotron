@@ -22,6 +22,20 @@ from demotron.config import get_service_account_info
 
 app = typer.Typer()
 
+def display_tool_info():
+    """
+    Display the tool description and available commands.
+    """
+    typer.echo("demotron: CLI to delight real people with live demos")
+    typer.echo("\nAvailable commands:")
+    typer.echo("  rename-column  Rename a column in a database table")
+    typer.echo("  append-rawdata  Append generated fake data to a new or existing table")
+    typer.echo("\nRun 'demotron COMMAND --help' for more information on a specific command.")
+
+@app.callback(invoke_without_command=True)
+def main(ctx: typer.Context):
+    if ctx.invoked_subcommand is None:
+        display_tool_info()
 
 @app.command()
 def rename_column(
