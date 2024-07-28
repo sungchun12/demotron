@@ -14,6 +14,7 @@ project_root = str(Path(__file__).resolve().parent.parent)
 sys.path.insert(0, project_root)
 
 import typer
+from typing_extensions import Annotated
 from google.oauth2 import service_account
 from demotron.rename_column_util import rename_column_util
 from demotron.load_raw_events import RawEventLoader
@@ -21,30 +22,28 @@ from datetime import datetime
 from demotron.config import get_service_account_info
 from demotron import __version__
 
-app = typer.Typer()
-
-def display_tool_info():
-    """
-    Display the tool description and available commands.
-    """
-    typer.echo("demotron: CLI to delight real people with live demos")
-    typer.echo("\nAvailable commands:")
-    typer.echo("  rename-column  Rename a column in a database table")
-    typer.echo("  append-rawdata  Append generated fake data to a new or existing table")
-    typer.echo("\nRun 'demotron COMMAND --help' for more information on a specific command.")
+app = typer.Typer(
+    help="demotron: CLI to delight real people with live demos",
+    no_args_is_help=True,
+)
 
 def version_callback(value: bool):
     if value:
         typer.echo(f"demotron version: {__version__}")
         raise typer.Exit()
 
-@app.callback(invoke_without_command=True)
+@app.callback()
 def main(
-    ctx: typer.Context,
-    version: bool = typer.Option(None, "--version", callback=version_callback, is_eager=True, help="Show the version and exit.")
+    version: Annotated[bool, typer.Option(
+        "--version",
+        callback=version_callback,
+        is_eager=True,
+        help="Show the version and exit."
+    )] = False,
 ):
-    if ctx.invoked_subcommand is None:
-        display_tool_info()
+    """
+    CLI to delight real people with live demos.
+    """
 
 @app.command()
 def rename_column(
