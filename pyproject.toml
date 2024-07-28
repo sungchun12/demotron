@@ -10,8 +10,9 @@ demotron = "demotron.main:app"
 
 [tool.poetry.dependencies]
 python = "^3.12"
-sqlmesh = {version= "0.107.6", extras = ["web"]}
+sqlmesh = {version= "0.107.6", extras = ["web","bigquery"]}
 typer={extras = ["all"], version = "^0.12.3"}
+google-auth = "^2.32.0"
 
 [tool.poetry.group.dev.dependencies]
 ruff = "^0.4.7"
