@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "demotron"
-version = "0.1.0"
+version = "0.1.1"
 description = "CLI to delight real people with live demos"
 authors = ["Sung Won Chung <sungwonchung3@gmail.com>"]
 readme = "README.md"
