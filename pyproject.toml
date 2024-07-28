@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "demotron"
+version = "0.1.0"
+description = "cli to delight real people with live demos"
+authors = ["sungchun12"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.12"
+sqlmesh = {version= "0.107.6", extras = ["web"]}
+typer="^0.12.3"
+
+[tool.poetry.group.dev.dependencies]
+ruff = "^0.4.7"
+mypy = "^1.10.0"
+pytest = "8.1.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
